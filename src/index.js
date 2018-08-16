@@ -13,7 +13,11 @@ import Cart from './containers/cart/Cart'
 import Profile from './containers/profile/Profile'
 import store from './redux/store'
 // 引入混合stylus样式
-import './assets/stylus/mixins.styl'
+import './assets/css/stylus/mixins.styl'
+import 'swiper/dist/css/swiper.css'
+import './assets/css/reset.css'
+import './assets/css/index.css'
+import './assets/js/index'
 
 ReactDOM.render((
   <Provider store={store}>
