@@ -39,8 +39,9 @@ class Home extends Component {
   }
 
   render () {
+
     const {homeData} = this.props
-    const {focusList, tagList, newItemNewUserList, popularItemList, flashSaleIndexVO, topicList, cateList} = homeData
+    const {focusList, tagList, newItemNewUserList, popularItemList, flashSaleIndexVO, topicList, cateList} = homeData;
     return (
       <div className='home'>
         {/* 头部：搜索导航 */}

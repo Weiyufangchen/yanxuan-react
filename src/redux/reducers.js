@@ -40,7 +40,7 @@ function topicData(state = initTopicData, action) {
 }
 
 // 尝试navData状态的reducer
-const initNavData = {}
+const initNavData = []
 
 function navData(state = initNavData, action) {
   switch (action.type) {

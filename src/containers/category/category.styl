@@ -1,0 +1,116 @@
+.cateNavLeft
+  position: fixed
+  top: 1.17333rem
+  left: 0
+  bottom: 0
+  z-index: 4
+  width: 2.16rem
+  background-color: #fff
+  &::after
+    content: ''
+    position: absolute
+    background-color: rgba(0,0,0,.15)
+    top: 0
+    bottom: 0
+    width: 1px
+    transform-origin: 100% 50% 0
+    right: 0
+.cateNav
+  padding: .53333rem 0 1.84rem 0
+  .item
+    width: 100%
+    height: .66667rem
+    text-align: center
+    border: none
+    /*加号选择器，相邻兄弟选择器*/
+    +.item
+      margin-top .5333rem
+    .txt
+      display: block
+      color: #333
+      font-size: .37333rem
+      line-height: .66667rem
+      text-overflow: ellipsis
+      white-space: nowrap
+      overflow: hidden
+    &.active
+      position: relative
+      &::before
+        content: ' '
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        width: .08rem
+        background-color: #ab2b2b
+      .txt
+        font-size: .4rem
+        color: #ab2b2b
+ /* 右侧菜单显示列表 */
+.categoryNavRight
+  transition opacity .5s
+  margin-left: 2.16rem
+  padding: .4rem .4rem .28rem
+  background-color: #fff
+  position: relative
+  .wrap
+    position: absolute
+    width: 90%
+    top: 0.4rem
+  .show
+    display: block
+  .hide
+    display: none
+  .banner
+    position: relative
+    width: 100%
+    height: 2.56rem
+    display: table
+    background: center no-repeat #f4f4f4
+    background-size: cover
+    border-radius: 4px
+  .hd
+    height: 1.44rem
+    line-height: 1.44rem
+    text-align: center
+    font-size: .32rem
+    color: #333
+    .text
+      position: relative
+      &::before, &::after
+        position: absolute
+        content: ''
+        top: 0
+        bottom: 0
+        margin: auto
+        height: 1px
+        width: .53333rem
+        background-color: #d9d9d9
+        -webkit-transform-origin: 50% 100% 0
+        transform-origin: 50% 100% 0
+      &::before
+        left: -.74667rem
+      &::after
+        right: -.74667rem
+  .cateItem
+    display: inline-block
+    margin-right: .45333rem
+    font-size: 0
+    width: 1.92rem
+    vertical-align: top
+    &:nth-child(3n)
+      margin-right -.1333rem
+    .cateImgWraper
+      width: 1.92rem
+      height: 1.92rem
+      background: url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/water-d839a69b0d.png) center no-repeat
+    .cateImg
+      display: block
+      width: 100%
+      background: #fff
+    .name
+      height: .96rem
+      font-size: .32rem
+      color: #333
+      text-align: center
+      line-height: .45333rem
