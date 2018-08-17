@@ -12,6 +12,8 @@ import Category from './containers/category/Category'
 import Cart from './containers/cart/Cart'
 import Profile from './containers/profile/Profile'
 import store from './redux/store'
+// 引入mock文件
+import './mock/mockServer'
 // 引入混合stylus样式
 import './assets/css/stylus/mixins.styl'
 import 'swiper/dist/css/swiper.css'

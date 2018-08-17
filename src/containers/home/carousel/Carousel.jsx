@@ -3,46 +3,51 @@
  */
 import React, {Component} from 'react'
 import Swiper from 'swiper'
+import {withRouter} from 'react-router-dom'
+// import PropTypes from 'prop-types'
 
 import './carousel.styl'
 
-export default class Carousel extends Component {
+class Carousel extends Component {
 
-  componentDidMount () {
+  componentDidUpdate() {
+    // 首页轮播图
     new Swiper('#carousel', {
-      loop: true
+      loop: true, // 循环轮播
+      // 自动轮播
+      autoplay: {
+        delay: 2000,  // 时长
+        disableOnInteraction: false  // 用户操作之后是否停止轮播，false表示继续轮播
+      },
+      pagination: {
+        // 是否需要分页器
+        el: '.swiper-pagination'
+      }
     })
   }
 
   render() {
+    const focusList = this.props.data
     return (
       <div className="indexFloor">
-        <div id="carousel swiper-container-banner">
+        <div id="carousel" className='swiper-container-banner'>
           <div className="swiper-wrapper">
-            <div className="swiper-slide" style={{width: 750}}>
-              <a href="javascript:;">
-                <img
-                  src="https://yanxuan.nosdn.127.net/95cc387d8e06fc708ce8ae7066b9478e.jpg?imageView&thumbnail=750x0&quality=75"
-                  alt="image"/>
-              </a>
-            </div>
-            <div className="swiper-slide" style={{width: 750}}>
-              <a href="javascript:;">
-                <img
-                  src="https://yanxuan.nosdn.127.net/95cc387d8e06fc708ce8ae7066b9478e.jpg?imageView&thumbnail=750x0&quality=75"
-                  alt="image"/>
-              </a>
-            </div>
-            <div className="swiper-slide" style={{width: 750}}>
-              <a href="javascript:;">
-                <img
-                  src="https://yanxuan.nosdn.127.net/95cc387d8e06fc708ce8ae7066b9478e.jpg?imageView&thumbnail=750x0&quality=75"
-                  alt="image"/>
-              </a>
-            </div>
-            {/* Add Pagination */}
-            <div className="swiper-pagination" slot="pagination"></div>
+            {
+              focusList ? (focusList.map(img => {
+                return (
+                  <div className="swiper-slide" style={{width: 750}} key={img.id}>
+                    <a href="javascript:;">
+                      <img
+                        src={img.picUrl}
+                        alt=""/>
+                    </a>
+                  </div>
+                )
+              })) : null
+            }
           </div>
+          {/* Add Pagination */}
+          <div className="swiper-pagination"></div>
         </div>
         <div className="service-policy">
           <ul className="grow">
@@ -70,3 +75,5 @@ export default class Carousel extends Component {
     )
   }
 }
+
+export default withRouter(Carousel)

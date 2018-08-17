@@ -9,8 +9,8 @@ import './shiwuHeader.styl'
 export default class ShiwuHeader extends Component {
   render () {
     return (
-      <div className="hdWraper" style={{height: '87px'}}>
-        <div className="shiwu-hd">
+      <div className="shiwuHeader hdWraper" style={{height: '87px'}}>
+        <div className="hd">
           <div className="topBar">
             <div className="bd">
               <div className="row">

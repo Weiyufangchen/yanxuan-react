@@ -3,6 +3,9 @@
  */
 import React, {Component} from 'react'
 import Swiper from 'swiper'
+import {connect} from 'react-redux'
+
+import {getHomeData, getTopicData, getNavData} from '../../redux/actions'
 // 引入样式
 import './home.styl'
 // 引入自定义模块组件
@@ -14,27 +17,40 @@ import LimitTimeBuy from '../../components/limitTimeBuy/LimitTimeBuy'
 import Weal from '../../components/weal/Weal'
 import FooterGuide from '../../components/footerGuide/FooterGuide'
 
+class Home extends Component {
 
-export default class Home extends Component {
+  componentWillMount () {
+    this.props.getHomeData()
+    this.props.getTopicData()
+    this.props.getNavData()
+  }
 
-  componentDidMount () {
-    new Swiper('.swiper-container-newItem', {
+  componentDidUpdate () {
+    new Swiper('.homeCarousel', {
       slidesPerView: 'auto',
-      centeredSlides: false
+      centeredSlides: false,
+      zoom: true
+    })
+    new Swiper('.homeCarousel-topic', {
+      slidesPerView: 'auto',
+      centeredSlides: false,
+      spaceBetween: 30
     })
   }
 
   render () {
+    const {homeData} = this.props
+    const {focusList, tagList, newItemNewUserList, popularItemList, flashSaleIndexVO, topicList, cateList} = homeData
     return (
       <div className='home'>
         {/* 头部：搜索导航 */}
         <HomeHeader/>
         {/* 首页轮播图 */}
-        <Carousel/>
+        <Carousel data={focusList}/>
         <Split/>
         {/* 品牌制造商直供 */}
         <div className='template'>
-          <Supply/>
+          <Supply data={tagList}/>
         </div>
         <Split/>
         {/* 新品首发 */}
@@ -52,98 +68,45 @@ export default class Home extends Component {
               </a>
             </header>
             <div className="goodGrid goodGrid-goodsList">
-              <div className="inner swiper-container-newItem">
+              <div className="inner swiper-container homeCarousel">
                 <div className="list swiper-wrapper">
-                  <div className="item swiper-slide">
-                    <a className="good" href="javascript:;">
-                      <div className="hd">
-                        <div className="wraper">
-                          <img
-                            src="http://yanxuan.nosdn.127.net/efaae8a4043638814b76b329647ccd27.png?imageView&quality=65&thumbnail=330x330"/>
-                        </div>
-                        <div className="desc">两圈相连，永恒相伴</div>
-                      </div>
-                      <div className="tagWrapper">
-                        <p className="status anniversary">七夕推荐</p>
-                      </div>
-                      <div className="name">
-                        <span>牵绊永恒 双环镀金项链</span>
-                      </div>
-                      <div className="newItemDesc">两圈相连，永恒相伴</div>
-                      <div className="price">
-                        <div>
-                          <span>￥359</span>
-                        </div>
-                      </div>
-                      <span></span>
-                      <div className="specification">
-                        <div>3</div>
-                        <div>色</div>
-                        <div>可</div>
-                        <div>选</div>
-                      </div>
-                    </a>
-                  </div>
-                  <div className="item swiper-slide">
-                    <a className="good" href="javascript:;">
-                      <div className="hd">
-                        <div className="wraper">
-                          <img
-                            src="http://yanxuan.nosdn.127.net/efaae8a4043638814b76b329647ccd27.png?imageView&quality=65&thumbnail=330x330"/>
-                        </div>
-                        <div className="desc">两圈相连，永恒相伴</div>
-                      </div>
-                      <div className="tagWrapper">
-                        <p className="status anniversary">七夕推荐</p>
-                      </div>
-                      <div className="name">
-                        <span>牵绊永恒 双环镀金项链</span>
-                      </div>
-                      <div className="newItemDesc">两圈相连，永恒相伴</div>
-                      <div className="price">
-                        <div>
-                          <span>￥359</span>
-                        </div>
-                      </div>
-                      <span></span>
-                      <div className="specification">
-                        <div>3</div>
-                        <div>色</div>
-                        <div>可</div>
-                        <div>选</div>
-                      </div>
-                    </a>
-                  </div>
-                  <div className="item swiper-slide">
-                    <a className="good" href="javascript:;">
-                      <div className="hd">
-                        <div className="wraper">
-                          <img
-                            src="http://yanxuan.nosdn.127.net/efaae8a4043638814b76b329647ccd27.png?imageView&quality=65&thumbnail=330x330"/>
-                        </div>
-                        <div className="desc">两圈相连，永恒相伴</div>
-                      </div>
-                      <div className="tagWrapper">
-                        <p className="status anniversary">七夕推荐</p>
-                      </div>
-                      <div className="name">
-                        <span>牵绊永恒 双环镀金项链</span>
-                      </div>
-                      <div className="newItemDesc">两圈相连，永恒相伴</div>
-                      <div className="price">
-                        <div>
-                          <span>￥359</span>
-                        </div>
-                      </div>
-                      <span></span>
-                      <div className="specification">
-                        <div>3</div>
-                        <div>色</div>
-                        <div>可</div>
-                        <div>选</div>
-                      </div>
-                    </a>
-                  </div>
+                  {
+                    newItemNewUserList ? (
+                      newItemNewUserList.map(item => {
+                        return (
+                          <div className="item swiper-slide" key={item.id}>
+                            <a className="good" href="javascript:;">
+                              <div className="hd">
+                                <div className="wraper">
+                                  <img src={item.listPicUrl}/>
+                                </div>
+                                <div className="desc">{item.simpleDesc}</div>
+                              </div>
+                              <div className="tagWrapper">
+                                <p className="status anniversary">七夕推荐</p>
+                              </div>
+                              <div className="name">
+                                <span>{item.name}</span>
+                              </div>
+                              <div className="newItemDesc">{item.simpleDesc}</div>
+                              <div className="price">
+                                <div>
+                                  <span>￥{item.retailPrice}</span>
+                                </div>
+                              </div>
+                              <span></span>
+                              <div className="specification">
+                                <div>3</div>
+                                <div>色</div>
+                                <div>可</div>
+                                <div>选</div>
+                              </div>
+                            </a>
+                          </div>
+                        )
+                      })
+                    ) : null
+                  }
                   <div className="item swiper-slide more">
                     <a href="javascript:;" style={{display: 'block', width: '100%', height: '100%',}}>
                       <span className="text">查看全部</span>
@@ -170,98 +133,46 @@ export default class Home extends Component {
               </a>
             </header>
             <div className="goodGrid goodGrid-goodsList">
-              <div className="inner swiper-container-newItem">
+              <div className="inner swiper-container homeCarousel">
                 <div className="list swiper-wrapper">
-                  <div className="item swiper-slide">
-                    <a className="good" href="javascript:;">
-                      <div className="hd">
-                        <div className="wraper">
-                          <img
-                            src="http://yanxuan.nosdn.127.net/efaae8a4043638814b76b329647ccd27.png?imageView&quality=65&thumbnail=330x330"/>
-                        </div>
-                        <div className="desc">两圈相连，永恒相伴</div>
-                      </div>
-                      <div className="tagWrapper">
-                        <p className="status anniversary">七夕推荐</p>
-                      </div>
-                      <div className="name">
-                        <span>牵绊永恒 双环镀金项链</span>
-                      </div>
-                      <div className="newItemDesc">两圈相连，永恒相伴</div>
-                      <div className="price">
-                        <div>
-                          <span>￥359</span>
-                        </div>
-                      </div>
-                      <span></span>
-                      <div className="specification">
-                        <div>3</div>
-                        <div>色</div>
-                        <div>可</div>
-                        <div>选</div>
-                      </div>
-                    </a>
-                  </div>
-                  <div className="item swiper-slide">
-                    <a className="good" href="javascript:;">
-                      <div className="hd">
-                        <div className="wraper">
-                          <img
-                            src="http://yanxuan.nosdn.127.net/efaae8a4043638814b76b329647ccd27.png?imageView&quality=65&thumbnail=330x330"/>
-                        </div>
-                        <div className="desc">两圈相连，永恒相伴</div>
-                      </div>
-                      <div className="tagWrapper">
-                        <p className="status anniversary">七夕推荐</p>
-                      </div>
-                      <div className="name">
-                        <span>牵绊永恒 双环镀金项链</span>
-                      </div>
-                      <div className="newItemDesc">两圈相连，永恒相伴</div>
-                      <div className="price">
-                        <div>
-                          <span>￥359</span>
-                        </div>
-                      </div>
-                      <span></span>
-                      <div className="specification">
-                        <div>3</div>
-                        <div>色</div>
-                        <div>可</div>
-                        <div>选</div>
-                      </div>
-                    </a>
-                  </div>
-                  <div className="item swiper-slide">
-                    <a className="good" href="javascript:;">
-                      <div className="hd">
-                        <div className="wraper">
-                          <img
-                            src="http://yanxuan.nosdn.127.net/efaae8a4043638814b76b329647ccd27.png?imageView&quality=65&thumbnail=330x330"/>
-                        </div>
-                        <div className="desc">两圈相连，永恒相伴</div>
-                      </div>
-                      <div className="tagWrapper">
-                        <p className="status anniversary">七夕推荐</p>
-                      </div>
-                      <div className="name">
-                        <span>牵绊永恒 双环镀金项链</span>
-                      </div>
-                      <div className="newItemDesc">两圈相连，永恒相伴</div>
-                      <div className="price">
-                        <div>
-                          <span>￥359</span>
-                        </div>
-                      </div>
-                      <span></span>
-                      <div className="specification">
-                        <div>3</div>
-                        <div>色</div>
-                        <div>可</div>
-                        <div>选</div>
-                      </div>
-                    </a>
-                  </div>
+                  {
+                    popularItemList ? (
+                      popularItemList.map(item => {
+                        return (
+                          <div className="item swiper-slide" key={item.id}>
+                            <a className="good" href="javascript:;">
+                              <div className="hd">
+                                <div className="wraper">
+                                  <img
+                                    src={item.listPicUrl}/>
+                                </div>
+                                <div className="desc">{item.simpleDesc}</div>
+                              </div>
+                              <div className="tagWrapper">
+                                <p className="status anniversary">七夕推荐</p>
+                              </div>
+                              <div className="name">
+                                <span>{item.name}</span>
+                              </div>
+                              <div className="newItemDesc">{item.simpleDesc}</div>
+                              <div className="price">
+                                <div>
+                                  <span>￥{item.retailPrice}</span>
+                                </div>
+                              </div>
+                              <span></span>
+                              <div className="specification">
+                                <div>3</div>
+                                <div>色</div>
+                                <div>可</div>
+                                <div>选</div>
+                              </div>
+                            </a>
+                          </div>
+                        )
+                      })
+                    ) : null
+                  }
                   <div className="item swiper-slide more">
                     <a href="javascript:;" style={{display: 'block', width: '100%', height: '100%',}}>
                       <span className="text">查看全部</span>
@@ -274,7 +185,7 @@ export default class Home extends Component {
         </div>
         <Split/>
         {/* 限时购 */}
-        <LimitTimeBuy/>
+        <LimitTimeBuy data={flashSaleIndexVO}/>
         <Split/>
         {/* 福利社 */}
         <Weal/>
@@ -288,156 +199,92 @@ export default class Home extends Component {
             </a>
           </header>
           <div className="indexTopics-slide">
-            <div className="inner swiper-container">
+            <div className="inner swiper-container homeCarousel-topic">
               <ul className="list swiper-wrapper">
-                <li className="item swiper-slide" style={{marginRight: '20.8333px'}}>
-                  <a className="imgWrap" href="javascript:;">
-                    <img
-                      src="https://yanxuan.nosdn.127.net/e4d4520732e4e9aa5c9563f8ecc5e807.jpg?imageView&thumbnail=575y322&enlarge=1&quality=75"
-                      alt=""/>
-                  </a>
-                  <div className="line1">
-                    <h4 className="title">内衣决定夏日的舒适</h4>
-                    <span className="price">25元起</span>
-                  </div>
-                  <div className="desc">在最贴身的部位，不舒适怎能过好夏天。</div>
-                </li>
-                <li className="item swiper-slide" style={{marginRight: '20.8333px'}}>
-                  <a className="imgWrap" href="javascript:;">
-                    <img
-                      src="https://yanxuan.nosdn.127.net/e4d4520732e4e9aa5c9563f8ecc5e807.jpg?imageView&thumbnail=575y322&enlarge=1&quality=75"
-                      alt=""/>
-                  </a>
-                  <div className="line1">
-                    <h4 className="title">内衣决定夏日的舒适</h4>
-                    <span className="price">25元起</span>
-                  </div>
-                  <div className="desc">在最贴身的部位，不舒适怎能过好夏天。</div>
-                </li>
-                <li className="item swiper-slide" style={{marginRight: '20.8333px'}}>
-                  <a className="imgWrap" href="javascript:;">
-                    <img
-                      src="https://yanxuan.nosdn.127.net/e4d4520732e4e9aa5c9563f8ecc5e807.jpg?imageView&thumbnail=575y322&enlarge=1&quality=75"
-                      alt=""/>
-                  </a>
-                  <div className="line1">
-                    <h4 className="title">内衣决定夏日的舒适</h4>
-                    <span className="price">25元起</span>
-                  </div>
-                  <div className="desc">在最贴身的部位，不舒适怎能过好夏天。</div>
-                </li>
+                {
+                  topicList ? ( topicList.map(item => {
+                    return (
+                      <li className="item swiper-slide" key={item.id}>
+                        <a className="imgWrap" href="javascript:;">
+                          <img src={item.itemPicUrl} alt=""/>
+                        </a>
+                        <div className="line1">
+                          <h4 className="title">{item.title}</h4>
+                          <span className="price">{item.priceInfo}元起</span>
+                        </div>
+                        <div className="desc">{item.subtitle}</div>
+                      </li>
+                    )})
+                  ) : null
+                }
               </ul>
             </div>
           </div>
         </div>
         <Split/>
-        {/* 居家好物 */}
-        <div className="template">
-          <div className="titleGoodGrid">
-            <h3 className="title">居家好物</h3>
-            <div className="goodGrid">
-              <ul className="list">
-                <li className="item"
-                    style={{zIndex: '6', padding: '0rem 0.26666666666666666rem 0.44rem 0.13333333333333333rem'}}>
-                  <a className="good" href="javascript:;">
-                    <div className="hd-jujia">
-                      <div className="wraper">
-                        <img
-                          src="http://yanxuan.nosdn.127.net/05ecfb1f8beff52a1aa4e48b21dda530.png?imageView&quality=65&thumbnail=330x330"
-                          alt=""/>
-                        <div className="desc">硬度偏好者优选</div>
+        {/* 居家好物 */} {/* 遍历所有好物组件 */}
+        {
+          cateList ? (
+            cateList.map(list => {
+              return (
+                <div key={list.id}>
+                  <div className="template">
+                    <div className="titleGoodGrid">
+                      <h3 className="title">{list.name}好物</h3>
+                      <div className="goodGrid">
+                        <ul className="list">
+                          {
+                            list.itemList.slice(0, 7).map(item => {
+                              return (
+                                <li className="item" key={item.id}
+                                    style={{zIndex: '6', padding: '0rem 0.26666666666666666rem 0.44rem 0.13333333333333333rem'}}>
+                                  <a className="good" href="javascript:;">
+                                    <div className="hd-jujia">
+                                      <div className="wraper">
+                                        <img
+                                          src={item.listPicUrl}
+                                          alt=""/>
+                                        <div className="desc">{item.simpleDesc}</div>
+                                      </div>
+                                    </div>
+                                    <div className="tagWrapper">
+                                      <p className="status gradientPrice">{list.name}特惠</p>
+                                    </div>
+                                    <div className="name">
+                                      <span>{item.name}</span>
+                                    </div>
+                                    <div className="newItemDesc">{item.simpleDesc}</div>
+                                    <div className="price">
+                                      <span>￥{item.retailPrice}</span>
+                                    </div>
+                                    <span></span>
+                                    <div className="specification">
+                                      <div>3</div>
+                                      <div>色</div>
+                                      <div>可</div>
+                                      <div>选</div>
+                                    </div>
+                                  </a>
+                                </li>
+                              )
+                            })
+                          }
+                          <li className="item item-more">
+                            <a className="more moreH" href="javascript:;">
+                              <p className="txt">更多{list.name}好物</p>
+                              <i className="icon icon-goodGridMore"></i>
+                            </a>
+                          </li>
+                        </ul>
                       </div>
                     </div>
-                    <div className="tagWrapper">
-                      <p className="status gradientPrice">居家特惠</p>
-                    </div>
-                    <div className="name">
-                      <span>冬夏两用 护脊椰棕弹簧床垫</span>
-                    </div>
-                    <div className="newItemDesc">硬度偏好者优选</div>
-                    <div className="price">
-                      <span>￥2099</span>
-                    </div>
-                    <span></span>
-                    <div className="specification">
-                      <div>3</div>
-                      <div>色</div>
-                      <div>可</div>
-                      <div>选</div>
-                    </div>
-                  </a>
-                </li>
-                <li className="item"
-                    style={{zIndex: '6', padding: '0rem 0.26666666666666666rem 0.44rem 0.13333333333333333rem'}}>
-                  <a className="good" href="javascript:;">
-                    <div className="hd-jujia">
-                      <div className="wraper">
-                        <img
-                          src="http://yanxuan.nosdn.127.net/05ecfb1f8beff52a1aa4e48b21dda530.png?imageView&quality=65&thumbnail=330x330"
-                          alt=""/>
-                        <div className="desc">硬度偏好者优选</div>
-                      </div>
-                    </div>
-                    <div className="tagWrapper">
-                      <p className="status gradientPrice">居家特惠</p>
-                    </div>
-                    <div className="name">
-                      <span>冬夏两用 护脊椰棕弹簧床垫</span>
-                    </div>
-                    <div className="newItemDesc">硬度偏好者优选</div>
-                    <div className="price">
-                      <span>￥2099</span>
-                    </div>
-                    <span></span>
-                    <div className="specification">
-                      <div>3</div>
-                      <div>色</div>
-                      <div>可</div>
-                      <div>选</div>
-                    </div>
-                  </a>
-                </li>
-                <li className="item"
-                    style={{zIndex: '6', padding: '0rem 0.26666666666666666rem 0.44rem 0.13333333333333333rem'}}>
-                  <a className="good" href="javascript:;">
-                    <div className="hd-jujia">
-                      <div className="wraper">
-                        <img
-                          src="http://yanxuan.nosdn.127.net/05ecfb1f8beff52a1aa4e48b21dda530.png?imageView&quality=65&thumbnail=330x330"
-                          alt=""/>
-                        <div className="desc">硬度偏好者优选</div>
-                      </div>
-                    </div>
-                    <div className="tagWrapper">
-                      <p className="status gradientPrice">居家特惠</p>
-                    </div>
-                    <div className="name">
-                      <span>冬夏两用 护脊椰棕弹簧床垫</span>
-                    </div>
-                    <div className="newItemDesc">硬度偏好者优选</div>
-                    <div className="price">
-                      <span>￥2099</span>
-                    </div>
-                    <span></span>
-                    <div className="specification">
-                      <div>3</div>
-                      <div>色</div>
-                      <div>可</div>
-                      <div>选</div>
-                    </div>
-                  </a>
-                </li>
-                <li className="item item-more">
-                  <a className="more moreH" href="javascript:;">
-                    <p className="txt">更多居家好物</p>
-                    <i className="icon icon-goodGridMore"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <Split/>
+                  </div>
+                  <Split/>
+                </div>
+              )
+            })
+          ) : null
+        }
         {/* 鞋包配饰好物 */}
         {/* 服装好物 */}
         {/* 电器好物 */}
@@ -455,3 +302,10 @@ export default class Home extends Component {
     );
   }
 }
+// connect包装UI组件为容器组件
+export default connect(
+  // 更新获取状态
+  state => ({homeData: state.homeData}),
+  // 异步action，通知actions对象，发送ajax请求
+  {getHomeData, getTopicData, getNavData}
+)(Home)

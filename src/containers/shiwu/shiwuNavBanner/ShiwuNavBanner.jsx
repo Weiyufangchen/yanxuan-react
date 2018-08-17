@@ -9,7 +9,7 @@ import './shiwuNavBanner.styl'
 
 export default class ShiwuNavBanner extends Component {
 
-  componentDidMount () {
+  componentDidUpdate () {
     new Swiper('.swiper-container-banner2', {
       slidesPerView: 'auto',
       centeredSlides: false
@@ -17,52 +17,28 @@ export default class ShiwuNavBanner extends Component {
   }
 
   render () {
+    const {column} = this.props
     return (
       <div className="exploreChannels">
         <div className="swiper-container-banner2">
           <div className="list swiper-wrapper">
-            <a className="item swiper-slide" href="javascript:;">
-              <div className="imgContainer channelPic"></div>
-              <div className="icon icon-rbGradient">
-                <p className="topNum">334篇文章</p>
-              </div>
-              <div className="title">严选推荐</div>
-            </a>
-            <a className="item swiper-slide" href="javascript:;">
-              <div className="imgContainer channelPic"></div>
-              <div className="icon icon-rbGradient">
-                <p className="topNum">334篇文章</p>
-              </div>
-              <div className="title">严选推荐</div>
-            </a>
-            <a className="item swiper-slide" href="javascript:;">
-              <div className="imgContainer channelPic"></div>
-              <div className="icon icon-rbGradient">
-                <p className="topNum">334篇文章</p>
-              </div>
-              <div className="title">严选推荐</div>
-            </a>
-            <a className="item swiper-slide" href="javascript:;">
-              <div className="imgContainer channelPic"></div>
-              <div className="icon icon-rbGradient">
-                <p className="topNum">334篇文章</p>
-              </div>
-              <div className="title">严选推荐</div>
-            </a>
-            <a className="item swiper-slide" href="javascript:;">
-              <div className="imgContainer channelPic"></div>
-              <div className="icon icon-rbGradient">
-                <p className="topNum">334篇文章</p>
-              </div>
-              <div className="title">严选推荐</div>
-            </a>
-            <a className="item swiper-slide" href="javascript:;">
-              <div className="imgContainer channelPic"></div>
-              <div className="icon icon-rbGradient">
-                <p className="topNum">334篇文章</p>
-              </div>
-              <div className="title">严选推荐</div>
-            </a>
+            {
+              column ? (
+                column.map((item, index) => {
+                  return (
+                    <a className="item swiper-slide" key={index} href="javascript:;">
+                      <div className="imgContainer channelPic"
+                        style={{backgroundImage: 'url('+ item.picUrl +')'}}
+                      ></div>
+                      <div className="icon icon-rbGradient">
+                        <p className="topNum">{item.articleCount}</p>
+                      </div>
+                      <div className="title">{item.title}</div>
+                    </a>
+                  )
+                })
+              ) : null
+            }
           </div>
         </div>
       </div>

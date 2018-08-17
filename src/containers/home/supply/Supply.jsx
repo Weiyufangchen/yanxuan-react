@@ -7,63 +7,31 @@ import './supply.styl'
 
 export default class Supply extends Component {
   render() {
+    const tagList = this.props.data
     return (
       <div>
         <ModelHeader/>
         <div className="supplying">
           <ul className="list">
-            <li className="item">
-              <a href="javascript:;">
-                <div className="cnt">
-                  <h4 className="title">海外制造商</h4>
-                  <div>
-                    <span className="price1">9.9</span>
-                    <span className="price2">元起</span>
-                  </div>
-                  <i className="icon icon-new"></i>
-                </div>
-                <img src="http://yanxuan.nosdn.127.net/5e2f6d68ca4cf25b18d6573eafa2a4d4.png?imageView&thumbnail=355x0&quality=65" alt="supply"/>
-              </a>
-            </li>
-            <li className="item">
-              <a href="javascript:;">
-                <div className="cnt">
-                  <h4 className="title">海外制造商</h4>
-                  <div>
-                    <span className="price1">9.9</span>
-                    <span className="price2">元起</span>
-                  </div>
-                  <i className="icon icon-new"></i>
-                </div>
-                <img src="http://yanxuan.nosdn.127.net/5e2f6d68ca4cf25b18d6573eafa2a4d4.png?imageView&thumbnail=355x0&quality=65" alt="supply"/>
-              </a>
-            </li>
-            <li className="item">
-              <a href="javascript:;">
-                <div className="cnt">
-                  <h4 className="title">海外制造商</h4>
-                  <div>
-                    <span className="price1">9.9</span>
-                    <span className="price2">元起</span>
-                  </div>
-                  <i className="icon icon-new"></i>
-                </div>
-                <img src="http://yanxuan.nosdn.127.net/5e2f6d68ca4cf25b18d6573eafa2a4d4.png?imageView&thumbnail=355x0&quality=65" alt="supply"/>
-              </a>
-            </li>
-            <li className="item">
-              <a href="javascript:;">
-                <div className="cnt">
-                  <h4 className="title">海外制造商</h4>
-                  <div>
-                    <span className="price1">9.9</span>
-                    <span className="price2">元起</span>
-                  </div>
-                  <i className="icon icon-new"></i>
-                </div>
-                <img src="http://yanxuan.nosdn.127.net/5e2f6d68ca4cf25b18d6573eafa2a4d4.png?imageView&thumbnail=355x0&quality=65" alt="supply"/>
-              </a>
-            </li>
+            {
+              tagList ? (tagList.map(item => {
+                return (
+                  <li className="item" key={item.id}>
+                    <a href="javascript:;">
+                      <div className="cnt">
+                        <h4 className="title">{item.name}</h4>
+                        <div>
+                          <span className="price1">{item.floorPrice}</span>
+                          <span className="price2">元起</span>
+                        </div>
+                        {item.newOnshelf ? (<i className="icon icon-new"></i>) : null}
+                      </div>
+                      <img src={item.picUrl}/>
+                    </a>
+                  </li>
+                )
+              })) : null
+            }
           </ul>
         </div>
       </div>

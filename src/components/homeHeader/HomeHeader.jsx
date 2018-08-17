@@ -26,7 +26,6 @@ export default class HomeHeader extends Component {
         item.className = ''
       })
     }
-
     this.refs.span[index].className = 'active'
   }
 

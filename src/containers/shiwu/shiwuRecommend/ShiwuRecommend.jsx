@@ -8,7 +8,7 @@ import './shiwuRecommend.styl'
 
 export default class ShiwuRecommend extends Component {
 
-  componentDidMount () {
+  componentDidUpdate () {
     new Swiper('.swiper-container-tenFifteen', {
       slidesPerView: 'auto',
       centeredSlides: false
@@ -16,138 +16,201 @@ export default class ShiwuRecommend extends Component {
   }
 
   render () {
+    const {recommend, tenfifteen, zhen, yxLook, findMore} = this.props.topicData
     return (
       <div id='shiwuRecommends'>
         {/* 为你推荐 */}
-        <div className="recommends">
-          <div className="container">
-            <div className="module-title">为你推荐</div>
-            {/* mainPosItem */}
-            <a className="mainPosItem" href="javascript:;">
-              <div className="imgContainer mainPic">
-                <img className='mainImg' alt="" src="http://yanxuan.nosdn.127.net/9c16d0d118f00d9db00fa6414aea0487.jpg?imageView&quality=75"/>
-                <div className="topicTag">
-                  <p className="exploreTag">严选推荐</p>
-                </div>
-              </div>
-              <div className="topicInfo" style={{paddingBottom:'0.8933333333333333rem'}}>
-                <div className="line1">
-                  <span className="title">严选恋爱博物馆</span>
-                  <span className="price">9.9元起</span>
-                </div>
-                <div className="line2">
-                  <div className="subTitle">40款恋爱小甜饼高甜来袭！</div>
-                </div>
-              </div>
-            </a>
-            {/* minorPosItem */}
-            <a className="minorPosItem" href="javascript:;">
-              <div className="topicInfo">
-                <div className="author-container">
-                  <div className="author">
-                    <div className="avatar">
-                      <img src="//yanxuan.nosdn.127.net/45edf343a898f4a14d6d3086ce7d6ce8.png?imageView&quality=75&thumbnail=48y48" alt=""/>
+        {recommend ? (<div className="recommends">
+              <div className="container">
+                <div className="module-title">{recommend.name}</div>
+                {/* mainPosItem */}
+                <a className="mainPosItem" href="javascript:;">
+                  <div className="imgContainer mainPic">
+                    <img className='mainImg' alt="" src="http://yanxuan.nosdn.127.net/9c16d0d118f00d9db00fa6414aea0487.jpg?imageView&quality=75"/>
+                    <div className="topicTag">
+                      <p className="exploreTag">{recommend.Item[0].nickname}</p>
                     </div>
-                    <div className="nickname">丁磊</div>
                   </div>
-                </div>
-                <div className="line1">
-                  <p className="title">今年七夕送什么？</p>
-                </div>
-                <div className="line2">
-                  <p className="subTitle twolines">七夕女生零食礼盒，限量98元</p>
-                </div>
-              </div>
-              <div className="minorPic">
-                <div className="imgContainer">
-                  <img className='minorImg' src="//yanxuan.nosdn.127.net/ab35bcd18efd1a042d08dfe3d2438ea9.jpg?imageView&quality=75" alt=""/>
-                  <div className="topicTag">
-                    <div className="exploreTag">丁磊的好货推荐</div>
-                  </div>
-                </div>
-              </div>
-            </a>
-            {/* mainPosItem */}
-            <a className="mainPosItem" href="javascript:;">
-              <div className="imgContainer mainPic">
-                <img className='mainImg' alt="" src="http://yanxuan.nosdn.127.net/9c16d0d118f00d9db00fa6414aea0487.jpg?imageView&quality=75"/>
-                <div className="topicTag">
-                  <p className="exploreTag">严选推荐</p>
-                </div>
-              </div>
-              <div className="topicInfo" style={{paddingBottom:'0.8933333333333333rem'}}>
-                <div className="line1">
-                  <span className="title">严选恋爱博物馆</span>
-                  <span className="price">9.9元起</span>
-                </div>
-                <div className="line2">
-                  <div className="subTitle">40款恋爱小甜饼高甜来袭！</div>
-                </div>
-              </div>
-            </a>
-            {/* minorPosItem */}
-            <a className="minorPosItem" href="javascript:;">
-              <div className="topicInfo">
-                <div className="author-container">
-                  <div className="author">
-                    <div className="avatar">
-                      <img src="//yanxuan.nosdn.127.net/45edf343a898f4a14d6d3086ce7d6ce8.png?imageView&quality=75&thumbnail=48y48" alt=""/>
+                  <div className="topicInfo" style={{paddingBottom:'0.8933333333333333rem'}}>
+                    <div className="line1">
+                      <span className="title">{recommend.Item[0].title}</span>
+                      <span className="price">{recommend.Item[0].priceInfo}元起</span>
                     </div>
-                    <div className="nickname">丁磊</div>
+                    <div className="line2">
+                      <div className="subTitle">{recommend.Item[0].subTitle}</div>
+                    </div>
                   </div>
-                </div>
-                <div className="line1">
-                  <p className="title">今年七夕送什么？</p>
-                </div>
-                <div className="line2">
-                  <p className="subTitle twolines">七夕女生零食礼盒，限量98元</p>
-                </div>
-              </div>
-              <div className="minorPic">
-                <div className="imgContainer">
-                  <img className='minorImg' src="//yanxuan.nosdn.127.net/ab35bcd18efd1a042d08dfe3d2438ea9.jpg?imageView&quality=75" alt=""/>
-                  <div className="topicTag">
-                    <div className="exploreTag">丁磊的好货推荐</div>
+                </a>
+                {/* minorPosItem */}
+                <a className="minorPosItem" href="javascript:;">
+                  <div className="topicInfo">
+                    <div className="author-container">
+                      <div className="author">
+                        <div className="avatar">
+                          <img src={recommend.Item[1].avatar} alt=""/>
+                        </div>
+                        <div className="nickname">{recommend.Item[1].nickname}</div>
+                      </div>
+                    </div>
+                    <div className="line1">
+                      <p className="title">{recommend.Item[1].title}</p>
+                    </div>
+                    <div className="line2">
+                      <p className="subTitle twolines">{recommend.Item[1].subTitle}</p>
+                    </div>
                   </div>
-                </div>
+                  <div className="minorPic">
+                    <div className="imgContainer">
+                      <img className='minorImg' src={recommend.Item[1].picUrl} alt=""/>
+                      <div className="topicTag">
+                        <div className="exploreTag">{recommend.Item[1].typeName}</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <a className="minorPosItem" href="javascript:;">
+                  <div className="topicInfo">
+                    <div className="author-container">
+                      <div className="author">
+                        <div className="avatar">
+                          <img src={recommend.Item[2].avatar} alt=""/>
+                        </div>
+                        <div className="nickname">{recommend.Item[2].nickname}</div>
+                      </div>
+                    </div>
+                    <div className="line1">
+                      <p className="title">{recommend.Item[2].title}</p>
+                    </div>
+                    <div className="line2">
+                      <p className="subTitle twolines">{recommend.Item[2].subTitle}</p>
+                    </div>
+                  </div>
+                  <div className="minorPic">
+                    <div className="imgContainer">
+                      <img className='minorImg' src={recommend.Item[2].picUrl} alt=""/>
+                      <div className="topicTag">
+                        <div className="exploreTag">{recommend.Item[2].typeName}</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                {/* mainPosItem */}
+                <a className="mainPosItem" href="javascript:;">
+                  <div className="imgContainer mainPic">
+                    <img className='mainImg' alt="" src="http://yanxuan.nosdn.127.net/9c16d0d118f00d9db00fa6414aea0487.jpg?imageView&quality=75"/>
+                    <div className="topicTag">
+                      <p className="exploreTag">{recommend.Item[0].nickname}</p>
+                    </div>
+                  </div>
+                  <div className="topicInfo" style={{paddingBottom:'0.8933333333333333rem'}}>
+                    <div className="line1">
+                      <span className="title">{recommend.Item[0].title}</span>
+                      <span className="price">{recommend.Item[0].priceInfo}元起</span>
+                    </div>
+                    <div className="line2">
+                      <div className="subTitle">{recommend.Item[0].subTitle}</div>
+                    </div>
+                  </div>
+                </a>
+                {/* minorPosItem */}
+                <a className="minorPosItem" href="javascript:;">
+                  <div className="topicInfo">
+                    <div className="author-container">
+                      <div className="author">
+                        <div className="avatar">
+                          <img src={recommend.Item[1].avatar} alt=""/>
+                        </div>
+                        <div className="nickname">{recommend.Item[1].nickname}</div>
+                      </div>
+                    </div>
+                    <div className="line1">
+                      <p className="title">{recommend.Item[1].title}</p>
+                    </div>
+                    <div className="line2">
+                      <p className="subTitle twolines">{recommend.Item[1].subTitle}</p>
+                    </div>
+                  </div>
+                  <div className="minorPic">
+                    <div className="imgContainer">
+                      <img className='minorImg' src={recommend.Item[1].picUrl} alt=""/>
+                      <div className="topicTag">
+                        <div className="exploreTag">{recommend.Item[1].typeName}</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <a className="minorPosItem" href="javascript:;">
+                  <div className="topicInfo">
+                    <div className="author-container">
+                      <div className="author">
+                        <div className="avatar">
+                          <img src={recommend.Item[2].avatar} alt=""/>
+                        </div>
+                        <div className="nickname">{recommend.Item[2].nickname}</div>
+                      </div>
+                    </div>
+                    <div className="line1">
+                      <p className="title">{recommend.Item[2].title}</p>
+                    </div>
+                    <div className="line2">
+                      <p className="subTitle twolines">{recommend.Item[2].subTitle}</p>
+                    </div>
+                  </div>
+                  <div className="minorPic">
+                    <div className="imgContainer">
+                      <img className='minorImg' src={recommend.Item[2].picUrl} alt=""/>
+                      <div className="topicTag">
+                        <div className="exploreTag">{recommend.Item[2].typeName}</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
               </div>
-            </a>
-          </div>
-        </div>
+            </div>) : null}
         {/* tenFifteen */}
         <div className="tenFifteen">
           <div className="inner">
             <div className="module-title">十点一刻</div>
             <div className="swiper-container-tenFifteen">
               <div className="list swiper-wrapper">
-                <a className="item swiper-slide icon-tenFifteen" href="javascript:;">
-                  <div className="line-title">
-                    <span className="inner">今日话题</span>
-                  </div>
-                  <div className="title">你有哪些租房经历</div>
-                  <div className="desc">聊聊你用过的租房神器</div>
-                  <div className="joinInfo">
-                    <div className="inner">
-                      <div className="avatars">
-                        <div className="avatar">
-                          <img src="//yanxuan.nosdn.127.net/043087c63976c7631b0417d9916eae9a.jpg?imageView&thumbnail=48y48" alt=""/>
-                        </div>
-                        <div className="avatar">
-                          <img src="//yanxuan.nosdn.127.net/043087c63976c7631b0417d9916eae9a.jpg?imageView&thumbnail=48y48" alt=""/>
-                        </div>
-                        <div className="avatar">
-                          <img src="//yanxuan.nosdn.127.net/043087c63976c7631b0417d9916eae9a.jpg?imageView&thumbnail=48y48" alt=""/>
-                        </div>
-                        <div className="avatar" style={{zIndex: '0'}}>
-                          <div className="dot"></div>
-                          <div className="dot"></div>
-                          <div className="dot"></div>
-                        </div>
-                      </div>
-                      <div className="join">482人参与话题</div>
-                    </div>
-                  </div>
-                </a>
+                {
+                  tenfifteen ? (
+                    tenfifteen.map((item, index) => {
+                      return (
+                        <a key={index} className="item swiper-slide icon-tenFifteen" href="javascript:;">
+                          <div className="line-title">
+                            <span className="inner">今日话题</span>
+                          </div>
+                          <div className="title">{item.title}</div>
+                          <div className="desc">{item.desc}</div>
+                          <div className="joinInfo">
+                            <div className="inner">
+                              <div className="avatars">
+                                {
+                                  item.participantAvatar.map((itemAvatar, index) => {
+                                    if (itemAvatar) {
+                                      return (
+                                        <div className="avatar" key={index}>
+                                          <img src={itemAvatar} alt=""/>
+                                        </div>
+                                      )
+                                    }
+                                  })
+                                }
+                                <div className="avatar" style={{zIndex: '0'}}>
+                                  <div className="dot"></div>
+                                  <div className="dot"></div>
+                                  <div className="dot"></div>
+                                </div>
+                              </div>
+                              <div className="join">482人参与话题</div>
+                            </div>
+                          </div>
+                        </a>
+                      )
+                    })
+                  ) : null
+                }
                 <a className="item swiper-slide" href="javascript:;">
                   <div className="inner">
                     <p className="txt">查看全部话题</p>
@@ -159,101 +222,122 @@ export default class ShiwuRecommend extends Component {
           </div>
         </div>
         {/* recommends */}
-        <div className="recommends">
-          <div className="container">
-            <div className="module-title">严选甄品</div>
-            {/* mainPosItem */}
-            <a className="mainPosItem" href="javascript:;">
-              <div className="imgContainer mainPic">
-                <img src="http://yanxuan.nosdn.127.net/9c16d0d118f00d9db00fa6414aea0487.jpg?imageView&quality=75"
-                     alt=""/>
-                <div className="topicTag">
-                  <p className="exploreTag">严选推荐</p>
-                </div>
-              </div>
-              <div className="topicInfo" style={{paddingBottom:'0.8933333333333333rem'}}>
-                <div className="line1">
-                  <span className="title">严选恋爱博物馆</span>
-                  <span className="price">9.9元起</span>
-                </div>
-                <div className="line2">
-                  <div className="subTitle">40款恋爱小甜饼高甜来袭！</div>
-                </div>
-              </div>
-            </a>
-            {/* minorPosItem */}
-            <a className="minorPosItem" href="javascript:;">
-              <div className="topicInfo">
-                <div className="author-container">
-                  <div className="author">
-                    <div className="avatar">
-                      <img src="//yanxuan.nosdn.127.net/45edf343a898f4a14d6d3086ce7d6ce8.png?imageView&quality=75&thumbnail=48y48" alt=""/>
-                    </div>
-                    <div className="nickname">丁磊</div>
-                  </div>
-                </div>
-                <div className="line1">
-                  <p className="title">今年七夕送什么？</p>
-                </div>
-                <div className="line2">
-                  <p className="subTitle twolines">七夕女生零食礼盒，限量98元</p>
-                </div>
-              </div>
-              <div className="minorPic">
-                <div className="imgContainer">
-                  <img src="//yanxuan.nosdn.127.net/ab35bcd18efd1a042d08dfe3d2438ea9.jpg?imageView&quality=75" alt=""/>
+        {zhen ? (<div className="recommends">
+              <div className="container">
+                <div className="module-title">{zhen.name}</div>
+                {/* mainPosItem */}
+                <a className="mainPosItem" href="javascript:;">
+                <div className="imgContainer mainPic">
+                  <img className='mainImg' alt="" src="http://yanxuan.nosdn.127.net/9c16d0d118f00d9db00fa6414aea0487.jpg?imageView&quality=75"/>
                   <div className="topicTag">
-                    <div className="exploreTag">丁磊的好货推荐</div>
+                    <p className="exploreTag">{zhen.Item[0].nickname}</p>
                   </div>
                 </div>
+                <div className="topicInfo" style={{paddingBottom:'0.8933333333333333rem'}}>
+                  <div className="line1">
+                    <span className="title">{zhen.Item[0].title}</span>
+                    <span className="price">{zhen.Item[0].priceInfo}元起</span>
+                  </div>
+                  <div className="line2">
+                    <div className="subTitle">{zhen.Item[0].subTitle}</div>
+                  </div>
+                </div>
+              </a>
+                {/* minorPosItem */}
+                <a className="minorPosItem" href="javascript:;">
+                <div className="topicInfo">
+                  <div className="author-container">
+                    <div className="author">
+                      <div className="avatar">
+                        <img src={zhen.Item[1].avatar} alt=""/>
+                      </div>
+                      <div className="nickname">{zhen.Item[1].nickname}</div>
+                    </div>
+                  </div>
+                  <div className="line1">
+                    <p className="title">{zhen.Item[1].title}</p>
+                  </div>
+                  <div className="line2">
+                    <p className="subTitle twolines">{zhen.Item[1].subTitle}</p>
+                  </div>
+                </div>
+                <div className="minorPic">
+                  <div className="imgContainer">
+                    <img className='minorImg' src={zhen.Item[1].picUrl} alt=""/>
+                    <div className="topicTag">
+                      <div className="exploreTag">{zhen.Item[1].typeName}</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+                <a className="minorPosItem" href="javascript:;">
+                <div className="topicInfo">
+                  <div className="author-container">
+                    <div className="author">
+                      <div className="avatar">
+                        <img src={zhen.Item[2].avatar} alt=""/>
+                      </div>
+                      <div className="nickname">{zhen.Item[2].nickname}</div>
+                    </div>
+                  </div>
+                  <div className="line1">
+                    <p className="title">{zhen.Item[2].title}</p>
+                  </div>
+                  <div className="line2">
+                    <p className="subTitle twolines">{zhen.Item[2].subTitle}</p>
+                  </div>
+                </div>
+                <div className="minorPic">
+                  <div className="imgContainer">
+                    <img className='minorImg' src={zhen.Item[2].picUrl} alt=""/>
+                    <div className="topicTag">
+                      <div className="exploreTag">{zhen.Item[2].typeName}</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
               </div>
-            </a>
-          </div>
-        </div>
+            </div>) : null}
         {/* look */}
-        <div className="look">
-          <div className="module-title">严选LOOK</div>
-          <a className="content" href="javascript:;">
-            <div className="imgWrap">
-              <img src="//yanxuan.nosdn.127.net/8e1f8b6e0c7a06c863935613ae090e9d.jpg?imageView&quality=75" alt=""/>
-            </div>
-            <div className="topicInfo">
-              <div className="author-container">
-                <div className="author">
-                  <div className="avatar">
-                    <img src="//yanxuan.nosdn.127.net/45edf343a898f4a14d6d3086ce7d6ce8.png?imageView&quality=75&thumbnail=48y48" alt=""/>
-                  </div>
-                  <div className="nickname">丁磊</div>
+        {yxLook ? (<div className="look">
+              <div className="module-title">{yxLook.title}</div>
+              <a className="content" href="javascript:;">
+                <div className="imgWrap">
+                  <img src={yxLook.picUrl} alt=""/>
                 </div>
-              </div>
-              <div className="desc">美美哒，主子很满意，不时啃一啃，解决喵与花不可得兼的困扰😂</div>
-            </div>
-          </a>
-        </div>
+                <div className="topicInfo">
+                  <div className="author-container">
+                    <div className="author">
+                      <div className="avatar">
+                        <img src={yxLook.avatar} alt=""/>
+                      </div>
+                      <div className="nickname">{yxLook.nickname}</div>
+                    </div>
+                  </div>
+                  <div className="desc">{yxLook.content}</div>
+                </div>
+              </a>
+            </div>) : null}
         {/* exploreMore */}
         <div className="exploreMore">
           <div className="line-title">
             <div className="inner">更多精彩</div>
           </div>
           <div className="content">
-            <a className="topicItem" href="javascript:;">
-              <div className="imgContainer onePic">
-                <img src="//yanxuan.nosdn.127.net/2ff7bd412d5537ee17fa46619ae48f4e.jpg?imageView&quality=75" alt=""/>
-              </div>
-              <div className="desc">40款恋爱小甜饼高甜来袭！</div>
-            </a>
-            <a className="topicItem" href="javascript:;">
-              <div className="imgContainer onePic">
-                <img src="//yanxuan.nosdn.127.net/2ff7bd412d5537ee17fa46619ae48f4e.jpg?imageView&quality=75" alt=""/>
-              </div>
-              <div className="desc">40款恋爱小甜饼高甜来袭！</div>
-            </a>
-            <a className="topicItem" href="javascript:;">
-              <div className="imgContainer onePic">
-                <img src="//yanxuan.nosdn.127.net/2ff7bd412d5537ee17fa46619ae48f4e.jpg?imageView&quality=75" alt=""/>
-              </div>
-              <div className="desc">40款恋爱小甜饼高甜来袭！</div>
-            </a>
+            {
+              findMore ? (
+                findMore.map(item => {
+                  return (
+                    <a className="topicItem" href="javascript:;" key={item.topicId}>
+                      <div className="imgContainer onePic">
+                        <img src={item.itemPicUrl} alt=""/>
+                      </div>
+                      <div className="desc">{item.subTitle}</div>
+                    </a>
+                  )
+                })
+              ) : null
+            }
           </div>
         </div>
       </div>

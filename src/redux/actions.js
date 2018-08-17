@@ -37,10 +37,9 @@ const errMsg = msg => ({type: ERR_MSG, data: msg})
 export function getHomeData() {
   return async dispatch => {
   //  1. 执行异步代码（发送ajax请求）
-    const response = await reqHomeData()
-    const result = response.data
+    const result = await reqHomeData()
     if (result.code === 0) {  // 请求成功
-      // 2. 有了结果后, 根据结果不同分发不同的同步action
+      // 2. 有了结果后, 根据结果不同分发不同的同步action，传给reducers对象
       dispatch(homeDataSuccess(result.data));
     } else {
       dispatch(errMsg(result.msg))
@@ -51,8 +50,7 @@ export function getHomeData() {
 // 请求topicData数据
 export function getTopicData() {
   return async dispatch => {
-    const response = await reqTopicData()
-    const result = response.data
+    const result = await reqTopicData()
     if (result.code === 0) {
       dispatch(topicDataSuccess(result.data))
     }
@@ -62,8 +60,7 @@ export function getTopicData() {
 // 请求navData数据
 export function getNavData() {
   return async dispatch => {
-    const response = await reqNavData()
-    const result = response.data
+    const result = await reqNavData()
     if (result.code === 0) {
       dispatch(navDataSuccess(result.data))
     }
