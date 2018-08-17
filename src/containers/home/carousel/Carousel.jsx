@@ -2,15 +2,37 @@
 首页轮播图组件carousel
  */
 import React, {Component} from 'react'
+import Swiper from 'swiper'
 
 import './carousel.styl'
 
 export default class Carousel extends Component {
+
+  componentDidMount () {
+    new Swiper('#carousel', {
+      loop: true
+    })
+  }
+
   render() {
     return (
       <div className="indexFloor">
-        <div id="carousel">
+        <div id="carousel swiper-container-banner">
           <div className="swiper-wrapper">
+            <div className="swiper-slide" style={{width: 750}}>
+              <a href="javascript:;">
+                <img
+                  src="https://yanxuan.nosdn.127.net/95cc387d8e06fc708ce8ae7066b9478e.jpg?imageView&thumbnail=750x0&quality=75"
+                  alt="image"/>
+              </a>
+            </div>
+            <div className="swiper-slide" style={{width: 750}}>
+              <a href="javascript:;">
+                <img
+                  src="https://yanxuan.nosdn.127.net/95cc387d8e06fc708ce8ae7066b9478e.jpg?imageView&thumbnail=750x0&quality=75"
+                  alt="image"/>
+              </a>
+            </div>
             <div className="swiper-slide" style={{width: 750}}>
               <a href="javascript:;">
                 <img

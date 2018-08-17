@@ -1,0 +1,342 @@
+/*recommends*/
+.recommends
+  padding: 0 .4rem .53333rem
+  margin-bottom: .26667rem
+  background-color: #fff
+/*公共标题title*/
+.module-title
+  background-color: #fff
+  text-align: center
+  font-size: .42667rem
+  height: 1.6rem
+  line-height: 1.6rem
+.exploreTag
+  display: inline-block
+  padding: 0 .21333rem
+  height: .48rem
+  line-height: .48rem
+  background-color: rgba(255,255,255,.9)
+  border: 1px solid #d9d9d9
+  border-radius: .26667rem
+  color: #333
+.author
+  display: flex
+  align-items: center
+  .avatar
+    overflow: hidden
+    border: 1px solid #d9d9d9
+    img
+      display: block
+      width: 100%
+      height: 100%
+  .nickname
+    color: #333
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+/*mainPosItem*/
+.mainPosItem
+  display: block
+  position: relative
+  color: #333
+  border: 1px solid #d9d9d9
+  border-radius: .10667rem
+  overflow: hidden
+  .imgContainer
+    position: relative
+    height: 5.14667rem
+    border-radius: .10667rem .10667rem 0 0
+    overflow: hidden
+    .mainImg
+      width: 100%
+      height: 100%
+  .topicTag
+    position: absolute
+    top: .26667rem
+    left: .26667rem
+  .topicInfo
+    overflow: hidden
+    position: relative
+    padding: .32rem .26667rem 0
+    background-color: #fff
+    .line1
+      margin-bottom: .25333rem
+      display: flex
+      tify-content: space-between
+      justify-content: space-between
+      align-items: center
+      line-height: 1.2
+      .title
+        flex: 1
+        margin-right: .4rem
+        font-size: .48rem
+        text-overflow: ellipsis
+        white-space: nowrap
+        overflow: hidden
+      .price
+        line-height: 1
+        font-size: .42667rem
+        text-align: center
+        min-width: 1.53333rem
+    .line2 .subTitle
+      position: relative
+      font-size: .37333rem
+      line-height: 1.2
+      color: #7f7f7f
+      text-overflow: ellipsis
+      white-space: nowrap
+      overflow: hidden
+.minorPosItem
+  display: flex
+  background-color: #fff
+  color: #333
+  border: 1px solid #d9d9d9
+  border-radius: .05333rem
+  margin-bottom: .4rem
+  .topicInfo
+    flex: 1
+    display: flex
+    flex-direction: column
+    justify-content: center
+    overflow: hidden
+    position: relative
+    padding-left: .26667rem
+    padding-right: .4rem
+    .author-container
+      margin-bottom: .33333rem
+      .author
+        .avatar
+          width:0.64rem
+          height:0.64rem
+          margin-right:0.10666666666666667rem
+          border-radius:50%
+    .line1
+      margin-bottom: .18667rem
+      line-height: 1.2
+      .title
+        margin-right: .4rem
+        font-size: .42667rem
+        text-overflow: ellipsis
+        white-space: nowrap
+        overflow: hidden
+    .line2
+      .subTitle
+        position: relative
+        font-size: .32rem
+        line-height: 1.5
+        color: #7f7f7f
+      .twoLines
+        display: block
+        overflow: hidden
+        text-overflow: ellipsis
+  .minorPic
+    position: relative
+    width: 3.73333rem
+    height: 3.62667rem
+    .imgContainer
+      position: relative
+      width: 100%
+      height: 100%
+      background-color: #f4f4f4
+      .minorImg
+        width: 100%
+        height: 100%
+  .topicTag
+    position: absolute
+    top: .13333rem
+    left: .13333rem
+.recommends .mainPosItem, .recommends .minorPosItem:first-child
+  margin-bottom: .4rem
+/*tenFifteen*/
+.icon-tenFifteen
+  display: inline-block
+  vertical-align: middle
+  background-image: url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/tenFifteen-2a1d0ea11b.png)
+  background-repeat: no-repeat
+  background-size: 100% 100%
+  width: 7.73333rem
+  height: 5.48rem
+.icon-circle-right-arrow
+  display: inline-block
+  vertical-align: middle
+  background-image: url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/circle-right-arrow-3d59025cb6.png)
+  background-repeat: no-repeat
+  background-size: 100% 100%
+  width: .4rem
+  height: .4rem
+.tenFifteen
+  overflow: hidden
+  padding: 0 .4rem .53333rem
+  height: 7.61333rem
+  background-color: #fff
+  margin-bottom: .26667rem
+  .swiper-container
+    overflow: visible
+  .list
+    display: flex
+    flex-flow row nowrap
+  .item
+    position: relative
+    width: 7.73333rem
+    height: 5.48rem
+    padding: .50667rem .53333rem 1.05333rem
+    margin-right: .4rem
+    text-align: center
+    color: #333
+    .line-title
+      display: flex
+      align-items: center
+      justify-content: center
+      margin-bottom: .53333rem
+      &::before, &::after
+        content: ''
+        display: block
+        width: .32rem
+        height: 1px
+        background-color: #7f7f7f
+      .inner
+        margin: 0 .10667rem
+        font-size: .32rem
+        color: #7f7f7f
+    .title
+      font-size: .48rem
+      font-weight: 700
+      margin-bottom: .18667rem
+    .desc
+      font-size: .37333rem
+      line-height: 1.5
+      display: block
+      overflow: hidden
+      text-overflow: ellipsis
+    .joinInfo
+      position: absolute
+      bottom: 1.05333rem
+      width: 6.66667rem
+      text-align: center
+      .inner
+        display: inline-block
+        overflow: hidden
+      .avatars
+        float: left
+        margin-right: .21333rem
+        .avatar
+          position: relative
+          float: left
+          height: .64rem
+          width: .64rem
+          overflow: hidden
+          border: 1px solid #fff
+          border-radius: 50%
+          &:last-child
+            border: 2px solid #fff
+            background-color: #d9d9d9
+            margin-left: -.08rem
+            display: flex
+            justify-content: center
+            align-items: center
+            .dot
+              width: .08rem
+              height: .08rem
+              border-radius: 50%
+              margin-right: .05333rem
+              background-color: #fff
+              &:last-child
+                margin-right: 0
+      .join
+        float: left
+        text-align: left
+        line-height: .64rem
+        font-size: .32rem
+        color: #7f7f7f
+    &:last-child
+      position: relative
+      height: 5.12rem
+      border: 10px solid #e6e6e6
+      padding: 0
+      margin-right: 0
+      background-color: #fafafa
+      .inner
+        position: absolute
+        top: 0
+        bottom: 0
+        left: 0
+        right: 0
+        margin: auto
+        width: 3.2rem
+        height: .50667rem
+        display: flex
+        align-items: center
+        .txt
+          color: #7f7f7f
+          font-size: .42667rem
+          line-height: .50667rem
+          margin-right: .22667rem
+/*look*/
+.look
+  position: relative
+  .content
+    position: relative
+    display: block
+    color: #333
+    .imgWrap
+      width: 100%
+      display: block
+  .topicInfo
+    overflow: hidden
+    position: relative
+    padding: .32rem .4rem .61333rem
+    background-color: #fff
+    .author-container
+      margin-bottom: .32rem
+      .author
+        height:0.64rem
+        font-size:0.32rem
+        .avatar
+          width:0.64rem
+          height:0.64rem
+          margin-right:0.10666666666666667rem
+          border-radius:50%;
+    .desc
+      font-size: .37333rem
+      line-height: 1.6
+      color: #7f7f7f
+/*exploreMore*/
+.exploreMore
+  margin: 0 .4rem .4rem
+  .line-title
+    height: 1.86667rem
+    display: flex
+    align-items: center
+    &::before, &::after
+      content: ' '
+      display: block
+      width: 3.52rem
+      height: 1px
+      background-color: #d9d9d9
+    .inner
+      margin: 0 .32rem
+      font-size: .37333rem
+      color: #333
+  .content
+    display: block
+    color: #333
+  .topicItem
+    display: block
+    padding: .32rem
+    margin-bottom: .4rem
+    background-color: #fff
+    color: #333
+    .imgContainer
+      background-color: #f4f4f4
+    .onePic
+      width: 8.56rem
+      height: 4.8rem
+    .desc
+      background-color: #fff
+      font-size: .37333rem
+      padding-top: .38667rem
+      padding-bottom: .37333rem
+      line-height: 1.2
+      text-overflow: ellipsis
+      white-space: nowrap
+      overflow: hidden

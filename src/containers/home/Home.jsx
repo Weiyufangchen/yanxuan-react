@@ -2,6 +2,7 @@
 首页路由组件
  */
 import React, {Component} from 'react'
+import Swiper from 'swiper'
 // 引入样式
 import './home.styl'
 // 引入自定义模块组件
@@ -15,6 +16,14 @@ import FooterGuide from '../../components/footerGuide/FooterGuide'
 
 
 export default class Home extends Component {
+
+  componentDidMount () {
+    new Swiper('.swiper-container-newItem', {
+      slidesPerView: 'auto',
+      centeredSlides: false
+    })
+  }
+
   render () {
     return (
       <div className='home'>

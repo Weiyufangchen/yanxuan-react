@@ -2,7 +2,9 @@
 首页头部组件HomerHeader
  */
 import React, {Component} from 'react'
+import {NavLink, Link, Route, Switch} from 'react-router-dom'
 //引入滚动的插件库
+import BScroll from 'better-scroll'
 // 引入样式
 import './homeHeader.styl'
 
@@ -11,8 +13,21 @@ export default class HomeHeader extends Component {
     navList: ['推荐', '居家', '鞋包配饰', '服装', '电器', '洗护', '饮食', '餐厨', '婴童', '文体', '特色区'],
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    new BScroll('.header-nav', {
+      scrollX: true,
+      click: true
+    })
+  }
 
+  addClass = (index) => {
+    if (this.refs.span.length) {
+      Array.prototype.slice.call(this.refs.span).forEach(item => {
+        item.className = ''
+      })
+    }
+
+    this.refs.span[index].className = 'active'
   }
 
   render() {
@@ -30,7 +45,7 @@ export default class HomeHeader extends Component {
             </div>
           </div>
           {/*首页导航*/}
-          <div className="header-nav border-1px">
+          <div ref='headerNav' className="header-nav border-1px">
             <ul className="nav-list">
               {
                 navList.map((item, index) => {
