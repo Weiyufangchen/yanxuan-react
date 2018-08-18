@@ -2,6 +2,8 @@
 品牌制造商直供supply
  */
 import React, {Component} from 'react'
+import LazyLoad from 'react-lazyload'
+
 import ModelHeader from '../../../components/modelHeader/ModelHeader'
 import './supply.styl'
 
@@ -26,7 +28,9 @@ export default class Supply extends Component {
                         </div>
                         {item.newOnshelf ? (<i className="icon icon-new"></i>) : null}
                       </div>
-                      <img src={item.picUrl}/>
+                      <LazyLoad>
+                        <img src={item.picUrl} alt=''/>
+                      </LazyLoad>
                     </a>
                   </li>
                 )

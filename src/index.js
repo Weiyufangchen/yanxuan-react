@@ -23,6 +23,7 @@ import 'swiper/dist/css/swiper.css'
 import './assets/css/reset.css'
 import './assets/css/index.css'
 import './assets/js/index'
+import 'antd-mobile/dist/antd-mobile.css';
 
 ReactDOM.render((
   <Provider store={store}>

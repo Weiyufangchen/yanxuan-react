@@ -30,32 +30,49 @@ class PhoneLogin extends Component {
     })
   }
 
+  // 验证手机号是否符合规范
+  isRightPhone = () => {
+    return /^1[34578]\d{9}$/.test(this.state.phone)
+  }
+
   // 登录
   goLogin = () => {
-  //  正则验证
+    //  正则验证
     const reg = /^1[34578]\d{9}$/
     if (!reg.test(this.state.phone)) {  // 手机号不符合规范
       alert('提示', '手机号格式不正确', [
-        {text: '取消', onPress: () => {
-          this.state.phone = ''
-          this.state.code = ''
-        }},
-        {text: '确定', onPress: () => {
-          this.state.phone = ''
-          this.state.code = ''
-        }}
-      ])
-      return
-    }else if (!/^\d{6}$/.test(this.state.code)) {
-      alert('提示', '请输入6位数字验证码', [
         {
           text: '取消', onPress: () => {
-            this.state.code = '';
+            this.setState({
+              phone: '',
+              code: ''
+            })
           }
         },
         {
           text: '确定', onPress: () => {
-            this.state.code = '';
+            this.setState({
+              phone: '',
+              code: ''
+            })
+          }
+        }
+      ])
+      return
+    } else if (!/^\d{6}$/.test(this.state.code)) {
+      alert('提示', '请输入6位数字验证码', [
+        {
+          text: '取消', onPress: () => {
+            this.setState({
+              code: ''
+            })
+          }
+        },
+        {
+          text: '确定', onPress: () => {
+            this.setState({
+              code: ''
+            })
           }
         }
       ]);
@@ -65,7 +82,7 @@ class PhoneLogin extends Component {
     }
   }
 
-  render () {
+  render() {
     const {phone, code} = this.state
     return (
       <div className='phoneLogin'>
@@ -77,12 +94,12 @@ class PhoneLogin extends Component {
             </div>
             <div className="userBox userBox-1">
               <section className="login_message">
-                <input type="text"  value={phone} onChange={this.phoneNumber} placeholder='请输入手机号'/>
+                <input type="text" value={phone} onChange={this.phoneNumber} placeholder='请输入手机号'/>
               </section>
               <section className="login_verification">
-                <input type="text"  value={code} onChange={this.phoneCode} placeholder='请输入验证码'/>
+                <input type="text" value={code} onChange={this.phoneCode} placeholder='请输入验证码'/>
                 <div className="getWrap">
-                  <a className="getsmscode">获取验证码</a>
+                  <a className="getsmscode" ref='getCode' onClick={this.getCode}>获取验证码</a>
                 </div>
               </section>
               <section className="login_hint">

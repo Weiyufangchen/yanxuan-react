@@ -4,6 +4,8 @@
 import React, {Component} from 'react'
 import Swiper from 'swiper'
 import {connect} from 'react-redux'
+import LazyLoad from 'react-lazyload'
+import ReactCssTransitionGroup from 'react-addons-css-transition-group'
 
 import {getHomeData, getTopicData, getNavData} from '../../redux/actions'
 // 引入样式
@@ -16,16 +18,40 @@ import Split from '../../components/split/Split'
 import LimitTimeBuy from '../../components/limitTimeBuy/LimitTimeBuy'
 import Weal from '../../components/weal/Weal'
 import FooterGuide from '../../components/footerGuide/FooterGuide'
+import GoTop from '../../components/goTop/GoTop'
 
 class Home extends Component {
 
-  componentWillMount () {
-    this.props.getHomeData()
-    this.props.getTopicData()
-    this.props.getNavData()
+  state = {
+    isShow: false,  // 默认不显示
+    scrollTop: 0  // 滚动位移
   }
 
-  componentDidUpdate () {
+  componentDidMount() {
+    this.props.getHomeData()
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = (e) => {
+    // console.log('浏览器滚动事件', window.pageYOffset)
+    if (window.pageYOffset >= 800) {
+      this.setState({
+        isShow: true,
+        scrollTop: window.pageYOffset
+      });
+    } else {
+      this.setState({
+        isShow: false,
+        scrollTop: window.pageYOffset
+      })
+    }
+  }
+
+  componentDidUpdate() {
     new Swiper('.homeCarousel', {
       slidesPerView: 'auto',
       centeredSlides: false,
@@ -38,12 +64,13 @@ class Home extends Component {
     })
   }
 
-  render () {
 
+  render() {
+    const {isShow, scrollTop} = this.state
     const {homeData} = this.props
     const {focusList, tagList, newItemNewUserList, popularItemList, flashSaleIndexVO, topicList, cateList} = homeData;
     return (
-      <div className='home'>
+      <div className='home' ref='home'>
         {/* 头部：搜索导航 */}
         <HomeHeader/>
         {/* 首页轮播图 */}
@@ -203,19 +230,20 @@ class Home extends Component {
             <div className="inner swiper-container homeCarousel-topic">
               <ul className="list swiper-wrapper">
                 {
-                  topicList ? ( topicList.map(item => {
-                    return (
-                      <li className="item swiper-slide" key={item.id}>
-                        <a className="imgWrap" href="javascript:;">
-                          <img src={item.itemPicUrl} alt=""/>
-                        </a>
-                        <div className="line1">
-                          <h4 className="title">{item.title}</h4>
-                          <span className="price">{item.priceInfo}元起</span>
-                        </div>
-                        <div className="desc">{item.subtitle}</div>
-                      </li>
-                    )})
+                  topicList ? (topicList.map(item => {
+                      return (
+                        <li className="item swiper-slide" key={item.id}>
+                          <a className="imgWrap" href="javascript:;">
+                            <img src={item.itemPicUrl} alt=""/>
+                          </a>
+                          <div className="line1">
+                            <h4 className="title">{item.title}</h4>
+                            <span className="price">{item.priceInfo}元起</span>
+                          </div>
+                          <div className="desc">{item.subtitle}</div>
+                        </li>
+                      )
+                    })
                   ) : null
                 }
               </ul>
@@ -238,7 +266,10 @@ class Home extends Component {
                             list.itemList.slice(0, 7).map(item => {
                               return (
                                 <li className="item" key={item.id}
-                                    style={{zIndex: '6', padding: '0rem 0.26666666666666666rem 0.44rem 0.13333333333333333rem'}}>
+                                    style={{
+                                      zIndex: '6',
+                                      padding: '0rem 0.26666666666666666rem 0.44rem 0.13333333333333333rem'
+                                    }}>
                                   <a className="good" href="javascript:;">
                                     <div className="hd-jujia">
                                       <div className="wraper">
@@ -286,23 +317,15 @@ class Home extends Component {
             })
           ) : null
         }
-        {/* 鞋包配饰好物 */}
-        {/* 服装好物 */}
-        {/* 电器好物 */}
-        {/* 洗护好物 */}
-        {/* 饮食好物 */}
-        {/* 餐厨好物 */}
-        {/* 婴童好物 */}
-        {/* 文体好物 */}
-        {/* 特色区好物 */}
-        {/* 下载App/电脑版 */}
-
+        {/* 回到顶部 */}
+        <GoTop isShow={isShow} scrollTop={scrollTop}/>
         {/* 底部导航栏 */}
         <FooterGuide/>
       </div>
     );
   }
 }
+
 // connect包装UI组件为容器组件
 export default connect(
   // 更新获取状态

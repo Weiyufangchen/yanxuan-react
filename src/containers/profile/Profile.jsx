@@ -34,8 +34,7 @@ class Profile extends Component {
                   <span>邮箱账号登录</span>
                 </div>
                 <div className="register" onClick={() => this.props.history.replace('/profile')}>
-                  <span>手机号快捷注册</span>
-                  <i className="icon icon-arrow-right"></i>
+                  <span>手机号快捷注册 > </span>
                 </div>
               </div>
             </div>
